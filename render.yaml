@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: neko-ai-online
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: NEKO_ACCESS_PASSWORD
+        sync: false
+      - key: NEKO_ACCESS_USER
+        value: neko
+      - key: OPENAI_MODEL
+        value: gpt-6.1-sol
+      - key: NEKO_ALLOWED_MODELS
+        value: gpt-6.1-sol,gpt-6.1-terra,gpt-6-luna
+      - key: OPENAI_REASONING_EFFORT
+        value: medium
+      - key: NEKO_MAX_OUTPUT_TOKENS
+        value: "4096"
+      - key: NEKO_DAILY_REQUEST_LIMIT
+        value: "30"
